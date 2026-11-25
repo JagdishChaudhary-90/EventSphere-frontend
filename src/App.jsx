@@ -8,13 +8,15 @@ function App() {
  
 
   return (
-  <div>
-    <House/>
+  <div className="min-h-screen flex flex-col bg-[#FAF9F5] text-stone-900 selection:bg-orange-100 selection:text-[#E65100]">
+    
    <Navbar/>
-   <Routes>
+   <div className="flex-1">
+    <Routes>
      <Route path="/" element={<h1>home</h1> }></Route>
      <Route path="*" element={<NotFound/> }></Route>
-   </Routes>
+    </Routes>
+   </div>
    <Footer/>
   </div>
   )
