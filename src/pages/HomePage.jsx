@@ -27,7 +27,7 @@ export default function HomePage() {
     }
     getFeaturedEvents();
   }, []);
-  
+
      return (
     <div className="space-y-16 pb-20">
       <section className="relative pt-12 pb-6 sm:pt-16 sm:pb-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
