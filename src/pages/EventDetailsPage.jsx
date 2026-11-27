@@ -1,3 +1,4 @@
+import { handleFavorite } from "@/components/events/EventCard";
 import EventReviewSection from "@/components/events/EventReviewSection";
 import api from "@/lib/axios";
 import {
@@ -18,6 +19,7 @@ import {
   Users,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux"
 import { Link, useParams } from "react-router";
 import { toast } from "sonner";
 
@@ -32,8 +34,12 @@ export default function EventDetailsPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [event, setEvent] = useState([]);
    const [reviews, setReviews] = useState([]);
-  //   const [featuredEvents, setFeaturedEvents] = useState([]);
-
+  const dispatch = useDispatch();
+  const isFavorite = useSelector((state) =>
+    state.favorites.items.some(
+      (e) => (e.id || e._id) === (event.id || event._id),
+    ),
+  );
   useEffect(() => {
     async function fetchEvent() {
       setIsLoading(true);
@@ -41,7 +47,9 @@ export default function EventDetailsPage() {
         let data = await api.get(`/api/events/${slug}`);
         setEvent(data);
 
-        let reviews  = await api.get(`/api/events/${data.id || data._id}/reviews`);
+        let reviews = await api.get(
+          `/api/events/${data.id || data._id}/reviews`,
+        );
         setReviews(reviews);
 
       } catch (error) {}
@@ -98,12 +106,16 @@ export default function EventDetailsPage() {
 
           <button
             type="button"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-medium transition-all cursor-pointer bg-white border-[#DDD9CE] hover:bg-stone-50 text-stone-700"
-          >
-            <span>
-              <Bookmark className="w-4 h-4" />
-            </span>
-            <span>Save</span>
+             onClick={(e) => handleFavorite(e, event, dispatch ,isFavorite)}
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-medium transition-all cursor-pointer ${
+              isFavorite
+                ? "bg-orange-50 border-orange-200 text-[#E65100]"
+                : "bg-white border-[#DDD9CE] hover:bg-stone-50 text-stone-700"
+            }`}>
+              <Bookmark
+              className={`w-3.5 h-3.5 ${isFavorite ? "fill-[#E65100]" : ""}`}
+            />
+            <span>{isFavorite ? "Saved" : "Save"}</span>
           </button>
         </div>
       </div>

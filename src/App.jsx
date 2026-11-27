@@ -6,6 +6,8 @@ import HomePage from "./pages/HomePage"
 import { useEffect } from "react";
 import EventDetailsPage from "./pages/EventDetailsPage";
 import { Toaster } from "sonner";
+import FavoritesPage from "./pages/FavoritesPage";
+import ExplorePage from "./pages/ExplorePage"
 
 function ScrollToTop() {
   const { pathname } = useLocation(); 
@@ -24,6 +26,8 @@ function App() {
     <Routes>
      <Route path="/" element={<HomePage/> }></Route>
      <Route path="/events/:slug" element={<EventDetailsPage/>}/>
+     <Route path="/favorites" element={<FavoritesPage />} />
+     <Route path="/explore" element={<ExplorePage />} />
      <Route path="*" element={<NotFound/> }></Route>
     </Routes>
    </div>
