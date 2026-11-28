@@ -1,4 +1,4 @@
-import { toggleFavorites } from "@/store/slices/favoriteSlice"
+import { toggleFavorite } from "@/store/slices/favoriteSlice"
 import { formatEventDate, formatPrice } from "@/lib/utils";
 import { Bookmark, Calendar } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +7,7 @@ import { toast } from "sonner";
 
 export function handleFavorite(e, event, dispatch, isFavorite) {
   e.preventDefault();
-  dispatch(toggleFavorites(event));
+  dispatch(toggleFavorite(event));
   if (isFavorite) {
     toast.info(`Removed "${event?.title}" from saved events`);
   } else {

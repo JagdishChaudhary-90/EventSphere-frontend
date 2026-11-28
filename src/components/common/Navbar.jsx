@@ -44,8 +44,6 @@ const Navbar = () => {
               <Compass className="w-4 h-4" />
               <span>Explore</span>
             </Link>
-            <span>Schedule</span>
-           
             <Link
               to="/schedule"
               className="px-3.5 py-2 text-sm font-medium rounded-xl transition-colors inline-flex items-center gap-2 text-stone-600 hover:text-stone-900 hover:bg-black/3"

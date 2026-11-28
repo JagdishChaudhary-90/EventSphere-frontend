@@ -114,28 +114,18 @@ export default function HomePage() {
      async function loadHomePage() {
       setIsLoading(true)
       try {
-        let {data: { data },
-        } = await axios.get(
-          "https://eventsphere-server-mfdb.onrender.com/api/events/featured",
-        );
-        console.log(data);
+         let { data } = await api.get("/api/events/featured");
         setFeaturedEvents(data);
       } catch (error) {}
       
       try {
-        let {
-          data: { data },
-        } = await axios.get(
-          "https://eventsphere-server-mfdb.onrender.com/api/categories",
-        );
+        let { data } = await api.get("/api/categories",);
         setCategories(data);
       } catch (error) {}
       
        try {
-        let {
-          data: { data },
-        } = await axios.get(
-          "https://eventsphere-server-mfdb.onrender.com/api/events?limit=8&sort=startDate&order=asc",
+        let { data  } = await api.get(
+          "/api/events?limit=8&sort=startDate&order=asc",
         );
         setTrendingEvents(data);
       } catch (error) {}
